@@ -1,0 +1,7 @@
+git config --global core.editor "'/c/Program\ Files/Notepad++/notepad++.exe' -n -w"
+git config --global push.default upstream
+git config --global merge.conflictstyle diff3
+git config --global user.name "NAME"
+git config --global user.email "EMAIL"
+
+
