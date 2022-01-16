@@ -20,7 +20,7 @@ alias gl="git log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %
 alias gm='git merge'
 
 # Bash aliases
-alias als='cd /c/Program\ Files/Git/etc/profile.d'
+alias als='txt /c/Program\ Files/Git/etc/profile.d/aliases.sh'
 alias o='explorer .'
 alias q='exit'
 alias c..='cd ..'

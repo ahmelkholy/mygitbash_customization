@@ -20,8 +20,8 @@ export GIT_PS1_SHOWDIRTYSTATE=1
 # '\W' adds the name of the current directory
 export PS1="$blue\u$green\$(__git_ps1)$cyan \W $ $reset"
 
-alias txt="/c/Program\ Files/Notepad++/notepad++.exe"
-alias g="/c/Users/ahm_e/AppData/Local/SourceTree/SourceTree.exe"
+alias txt="/c/Program\ Files/Sublime\ Text/sublime_text.exe"
+alias g="/c/Program\ Files/Sublime\ Merge/sublime_merge.exe"
 
 # add ~/.bash_profile if needed for executing ~/.bashrc
 if [ -e ~/.bashrc -a ! -e ~/.bash_profile -a ! -e ~/.bash_login -a ! -e ~/.profile ]; then
