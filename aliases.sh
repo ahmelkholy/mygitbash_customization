@@ -3,6 +3,7 @@
 
 # --show-control-chars: help showing Korean or accented characters
 # Git aliases
+alias init='git init'
 alias gs='git status -sb'
 alias gcc='git checkout'
 alias gcm='git checkout master'
@@ -18,6 +19,7 @@ alias ga='git add'
 alias gb='git branch'
 alias gl="git log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit"
 alias gm='git merge'
+alias ignor='touch .gitignore'
 
 # Bash aliases
 alias als='txt /c/Program\ Files/Git/etc/profile.d/aliases.sh'
