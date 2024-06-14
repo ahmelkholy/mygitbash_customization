@@ -1,0 +1,27 @@
+{
+	"name": "Vimium C",
+	"@time": "2/16/2023, 10:47:00 PM",
+	"time": 1676576820496,
+	"environment": {
+		"extension": "1.99.97",
+		"platform": "win",
+		"chromium": 110
+	},
+	"exclusionRules": [
+		{
+			"passKeys": "1 5 7 8 f j k l m ",
+			"pattern": "^https?://www\\.youtube\\.com/live"
+		}
+	],
+	"keyLayout": 2,
+	"keyMappings": [
+		"#!no-check",
+		"map p goBack",
+		"map q removeTab",
+		"map h previousTab",
+		"map l nextTab",
+		""
+	],
+	"keyupTime": 50,
+	"vimSync": true
+}

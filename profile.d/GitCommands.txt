@@ -1,0 +1,5 @@
+git config --global core.editor "'c:/program files/Sublime Text/sublime_text.exe' -w"
+git config --global push.default upstream
+git config --global merge.conflictstyle diff3
+git config --global user.name "Ahmed_Elkholy"
+git config --global user.email "ahmed_elkholy@f-eng.tanta.edu.eg"

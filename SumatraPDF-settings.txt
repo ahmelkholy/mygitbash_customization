@@ -1,0 +1,148 @@
+﻿# For documentation, see https://www.sumatrapdfreader.org/settings/settings3-4-6.html
+FixedPageUI [
+	TextColor = #000000
+	BackgroundColor = #f5f5dc
+	SelectionColor = #f5fc0c
+	WindowMargin = 0 0 0 0
+	PageSpacing = 0 0
+	GradientColors = #000000
+	HideScrollbars = true
+]
+ComicBookUI [
+	WindowMargin = 0 0 0 0
+	PageSpacing = 0 0
+	CbxMangaMode = false
+]
+ChmUI [
+	UseFixedPageUI = false
+]
+
+SelectionHandlers [
+]
+ExternalViewers [
+	[
+		CommandLine = "C:\Program Files\Nitro\Pro\13\NitroPDF.exe" /A page=%p "%1"
+		Name = Nitro
+		Filter = *.pdf
+	]
+]
+
+ZoomLevels = 8.33 12.5 18 25 33.33 50 66.67 75 100 125 150 200 300 400 600 800 1000 1200 1600 2000 2400 3200 4800 6400
+ZoomIncrement = 0
+
+PrinterDefaults [
+	PrintScale = shrink
+]
+ForwardSearch [
+	HighlightOffset = 1
+	HighlightWidth = 15
+	HighlightColor = #6581ff
+	HighlightPermanent = false
+]
+Annotations [
+	HighlightColor = #ffff00
+	UnderlineColor = #00ff00
+	TextIconColor = #ffff00
+	TextIconType = 
+	DefaultAuthor = 
+]
+
+RememberOpenedFiles = false
+RememberStatePerDocument = true
+RestoreSession = true
+UiLanguage = en
+InverseSearchCmdLine = "C:\Users\ahm_e\AppData\Local\Programs\Microsoft VS Code\Code.exe" "C:\Users\ahm_e\AppData\Local\Programs\Microsoft VS Code\resources\app\out\cli.js" --ms-enable-electron-run-as-node -r -g "%f:%l"
+EnableTeXEnhancements = true
+DefaultDisplayMode = continuous facing
+DefaultZoom = 107
+Shortcuts [
+	[
+		Cmd = CmdSearchSelectionWithGoogle
+		Key = alt+f
+	]
+	[
+		Cmd = CmdDeleteAnnotation
+		Key = d
+	]
+	[
+		Cmd = CmdCommandPalette
+		Key = Ctrl+Shift+p
+	]
+	[
+		Cmd = CmdEditAnnotations
+		Key = e
+	]
+	[
+		Cmd = CmdSaveAnnotations
+		Key = s
+	]
+	[
+		Cmd = CmdZoom200
+		Key = x
+	]
+	[
+		Cmd = CmdZoom125
+		Key = c
+	]
+]
+EscToExit = false
+ReuseInstance = false
+ReloadModifiedDocuments = true
+
+MainWindowBackground = #80fff200
+FullPathInTitle = false
+ShowMenubar = false
+ShowToolbar = false
+ShowFavorites = false
+ShowToc = false
+TocDy = 0
+SidebarDx = 348
+ToolbarSize = 18
+TabWidth = 300
+TreeFontSize = 0
+SmoothScroll = true
+ShowStartPage = false
+CheckForUpdates = true
+WindowState = 2
+WindowPos = 286 366 974 1080
+UseTabs = true
+UseSysColors = false 
+CustomScreenDPI = 0
+
+FileStates [
+	[
+		FilePath = C:\Users\ahm_e\Zotero\storage\732I9I5L\THYRISTOR-BASED FACTS CONTROLLERS FOR ELECTRICAL TRANSMISSION SYSTEMS.pdf
+		Favorites [
+			[
+				Name = chapter
+				PageNo = 55
+			]
+		]
+		IsPinned = false
+		IsMissing = false
+		OpenCount = 0
+		UseDefaultState = true
+	]
+	[
+		FilePath = C:\Users\ahm_e\Zotero\storage\W2RP6KIW\A three-phase unbalanced load flow solver for large-scale distribution power systems - 2017 - Cedeño.pdf
+		Favorites [
+			[
+				Name = IEEE13
+				PageNo = 59
+			]
+		]
+		IsPinned = false
+		IsMissing = false
+		OpenCount = 0
+		UseDefaultState = true
+	]
+]
+SessionData [
+]
+TimeOfLastUpdateCheck = 31039971 332316903
+OpenCountWeek = 650
+
+# Settings below are not recognized by the current version
+NoHomeTab = true
+TreeFontWeightOffset = 0
+TreeFontName = automatic
