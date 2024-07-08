@@ -2,13 +2,6 @@
 #SingleInstance Force
 SetWorkingDir D:\OneDrive - Faculty Of Engineering (Tanta University)\General_software\scripts\AHK
 
-; Get the directory of the current script
-currentScriptDir := A_ScriptDir
-; Construct the path to os.ahk relative to the current script's directory
-osScriptPath := currentScriptDir . "\os.ahk"
-; Run os.ahk
-Run, %osScriptPath%
-
 if not A_IsAdmin
     Run *RunAs "D:\OneDrive - Faculty Of Engineering (Tanta University)\General_software\scripts\AHK\shk.ahk"
 
