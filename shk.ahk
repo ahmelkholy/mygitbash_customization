@@ -1,13 +1,11 @@
-; run the   script as admin 
+; run the script as admin 
 #SingleInstance Force
 SetWorkingDir D:\OneDrive - Faculty Of Engineering (Tanta University)\General_software\scripts\AHK
-
 if not A_IsAdmin
     Run *RunAs "D:\OneDrive - Faculty Of Engineering (Tanta University)\General_software\scripts\AHK\shk.ahk"
 
-
-
 ; the code 
+
 :c:ds::DS
 :C:tanta::Tanta
 :C:egypt::Egypt
@@ -28,6 +26,7 @@ if not A_IsAdmin
 :C:@@f::ahmed_elkholy@f-eng.tanta.edu.eg
 :C:@@g::ahmedelkholy109@gmail.com
 :C:@@m::EdkholiakhmedM@mpei.ru
+:C:@@o::ahm_elkholy@outlook.com
 :*:proplem::problem
 :C:hte::the
 ::hight::height
@@ -38,6 +37,8 @@ if not A_IsAdmin
 :*:thsi::this
 :*:c\::C:\
 :*:d\::D:\
+:*:pys\::python C:\Users\ahm_e\Documents\Python_Scripts\src\
+:*:ps\::C:\Users\ahm_e\Documents\PowerShell\SRC
 :C:gui::GUI
 :C:matlab::MATLAB
 :*:hwo::how
@@ -47,7 +48,6 @@ if not A_IsAdmin
 :*:downl::download
 :*:docum::document
 :*:todo::TODO
-:*:worksp::workspace
 
 ;script for converting a note into Zettelkasten style.
 :*:pr_zettel::
@@ -116,7 +116,76 @@ reset()
 !w:: Send ^#{Left}                                              ;|
 !e::Send ^#{Right}                                              ;|
 SetCapsLockState, AlwaysOff
+;=====================================================================o
+!o::
+{
+    if WinExist("ahk_exe olk.exe")
+        WinActivate, ahk_exe olk.exe ; Activate the window with the title "olk.exe"
+    else
+    {
+        Run "olk.exe"
+        Sleep 500
+        WinActivate, ahk_exe olk.exe ; Activate the window with the title "olk.exe" after running Outlook
+    }
+    Return
+}
 
+;------------run matlab
+!m::Run "C:\Program Files\Wolfram Research\Mathematica\13.2\Mathematica.exe" -nosplash
+^!m::Run "C:\Program Files\MATLAB\R2024a\bin\matlab.exe" -nosplash
+#IfWinNotActive ahk_exe EXCEL.EXE
+!i::Run "C:\Program Files (x86)\Internet Download Manager\IDMan.exe"
+SetCapsLockState, AlwaysOff
+#IfWinNotActive
+
+!c::
+{
+SetTitleMatchMode, 2
+If WinExist("ahk_exe chrome.exe")
+    {
+    WinActivate, ahk_exe chrome.exe
+    Send ^t
+    Send !d
+    Return
+    }
+else
+    {
+    Run "C:\Program Files\Google\Chrome\Application\chrome.exe" --profile-directory="Default"
+    Sleep 500
+    WinActivate, ahk_exe chrome.exe
+    Send !d
+    Return
+    }
+Return
+}
+
+SetCapsLockState, AlwaysOff
+
+!s::
+{
+    Send, ^c
+    Sleep 50
+    If WinExist("ahk_exe msedge.exe")
+        WinActivate
+    else
+        Run, C:\Program Files (x86)\Microsoft\Edge\Application\msedge.exe
+    SetCapsLockState, AlwaysOff
+    Return
+}
+
+; !^q::
+; {
+;  Send, ^c
+;  Sleep 50
+;  Run, "C:\Program Files\Google\Chrome\Application\chrome_proxy.exe"  --profile-directory=Default --app-id=moennpndhigdhdkephojjndcmcamfjan
+;  Sleep 500
+;  Send, ^v
+;      SetCapsLockState, AlwaysOff
+;  Return
+; }
+; return
+; SetCapsLockState, AlwaysOff
+; ^!SPACE:: Winset, Alwaysontop, , A ; ctrl + space
 +Esc::Run taskmgr
     SetCapsLockState, AlwaysOff
 return
@@ -380,6 +449,87 @@ SetCapsLockState, AlwaysOff
 reset()
 
 ;=====================================================================o
+;                            CapsLock Editor                         ;|
+;-----------------------------------o---------------------------------o
+#IfWinActive ahk_exe msedge.exe
+CapsLock & z:: Send, ^+E
+!s::Send, ^t
+CapsLock & f::
+{
+Send ^c
+if GetKeyState("alt") = 0                                            ;|
+{                                                                    ;|
+SetTitleMatchMode, 2
+
+    Send ^t
+    Send !d
+    Send ^v
+Send {enter}
+Return
+
+
+return                                                       ;|
+}                                                                    ;|
+else
+{                                                               ;|
+    send ^f
+    Send ^v
+	return                                                          ;|
+}                                                                    ;|
+
+}
+#IfWinActive
+
+
+#IfWinNotActive ahk_exe msedge.exe
+CapsLock & z:: Run "C:\Program Files\Zotero\zotero.exe"
+
+
+#IfWinNotActive     ;|
+CapsLock & x:: Send, ^x                                              ;|
+CapsLock & c:: Send, ^c                                              ;|
+CapsLock & v:: Send, #!v                                              ;|
+
+#IfWinActive, ahk_class QPasteClass ahk_exe Ditto.exe
+j::Send {Down}
+k::Send {Up}
+`;::Send {Enter}
+return
+
+#IfWinActive
+#IfWinActive ahk_exe chrome.exe
+CapsLock & a::
+{
+    if GetKeyState("alt") = 0
+    {
+        Send, ^+{a}
+        return
+    }
+    else
+    {
+        Send, ^{a}
+        return
+    }
+    return
+}
+#IfWinActive
+
+#IfWinActive ahk_exe SumatraPDF.exe
+CapsLock & a::
+{
+    if GetKeyState("alt") = 0
+    {
+        Send, ^+{p}
+        return
+    }
+    else
+    {
+        Send, ^{a}
+        return
+    }
+    return
+}
+#IfWinActive
 
 #IfWinActive, ahk_exe Code.exe
 CapsLock & a::
@@ -431,22 +581,22 @@ reset()
 return
 #IfWinActive
 
-; #IfWinActive, ahk_exe  Cursor.exe
-; CapsLock & a::
-; {
-;     if GetKeyState("alt") = 0
-;     {
-;         Send, ^p
-;         return
-;     }
-;     else
-;     {
-;         Send, ^+p
-;         return
-;     }
-;     return
-; }
-; #IfWinActive
+#IfWinActive, ahk_exe  Cursor.exe
+CapsLock & a::
+{
+    if GetKeyState("alt") = 0
+    {
+        Send, ^p
+        return
+    }
+    else
+    {
+        Send, ^+p
+        return
+    }
+    return
+}
+#IfWinActive
 #IfWinActive, ahk_exe Obsidian.exe
 CapsLock & a::
 {
@@ -471,6 +621,9 @@ CapsLock & a::Send, ^+{a}
 CapsLock & a::Send, ^+{a}
 #IfWinActive
 
+#IfWinNotActive ahk_exe chrome.exe
+CapsLock & a::Send, ^{a}
+#IfWinNotActive                                      ;|
 CapsLock & y:: Send, ^y                                              ;|
 CapsLock & w::
 {
@@ -755,6 +908,34 @@ CapsLock & -:: Send,+{-}
 SetCapsLockState, AlwaysOff
 CapsLock & =:: Send,+{=}
 SetCapsLockState, AlwaysOff
+CapsLock & t::
+{
+if GetKeyState("alt") = 0                                            
+{                                                                    
+    If (WinExist("ahk_exe  Code.exe"))
+    WinActivate, ahk_exe Code.exe
+    Else
+    {
+    Run "C:\Users\ahm_e\AppData\Local\Programs\Microsoft VS Code\Code.exe"
+    Sleep, Delay, 200
+    WinActivate, ahk_exe Code.exe
+    }
+	Return
+}               
+else
+{          
+If (WinExist("ahk_exe Obsidian.exe"))
+    WinActivate, ahk_exe Obsidian.exe 
+Else
+    {
+	Run "C:\Users\ahm_e\AppData\Local\Obsidian\Obsidian.exe"
+    Sleep, Delay, 200
+    WinActivate, ahk_exe Obsidian.exe
+    }
+	Return 
+}               
+}
+
 SetCapsLockState, AlwaysOff
 
 reset()
@@ -762,7 +943,6 @@ reset()
 ; Only run when Windows Explorer or Desktop is active
 ; Alt+N
 ;-----------------------------------
-
 #IfWinActive ahk_class CabinetWClass
 !SC031::
 #IfWinActive ahk_class ExploreWClass
@@ -857,9 +1037,3 @@ Return
 Return
 
 
-#IfWinActive, ahk_class QPasteClass ahk_exe Ditto.exe
-j::Send {Down}
-k::Send {Up}
-`;::Send {Enter}
-return
-#IfWinActive
