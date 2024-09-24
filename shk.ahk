@@ -130,8 +130,14 @@ SetCapsLockState, AlwaysOff
     Return
 }
 
++!o::
+{
+    Run, "C:\Program Files\Google\Chrome\Application\chrome_proxy.exe"  --profile-directory=Default --app-id=kjbdgfilnfhdoflbpgamdcdgpehopbep
+    Return
+}
+
 ;------------run matlab
-!m::Run "C:\Program Files\Wolfram Research\Mathematica\13.2\Mathematica.exe" -nosplash
+!m::Run "C:\Program Files\Wolfram Research\Wolfram\14.1\WolframNB.exe" -nosplash
 ^!m::Run "C:\Program Files\MATLAB\R2024a\bin\matlab.exe" -nosplash
 #IfWinNotActive ahk_exe EXCEL.EXE
 !i::Run "C:\Program Files (x86)\Internet Download Manager\IDMan.exe"
