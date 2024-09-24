@@ -1035,5 +1035,3 @@ Return
     ; Open the directory in the Explorer
     Run, explorer.exe %FolderName%
 Return
-
-
