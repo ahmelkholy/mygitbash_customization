@@ -119,13 +119,13 @@ SetCapsLockState, AlwaysOff
 ;=====================================================================o
 !o::
 {
-    if WinExist("ahk_exe olk.exe")
-        WinActivate, ahk_exe olk.exe ; Activate the window with the title "olk.exe"
+    if WinExist("ahk_exe thunderbird.exe")
+        WinActivate, ahk_exe thunderbird.exe ; Activate the window with the title "thunderbird.exe"
     else
     {
-        Run "olk.exe"
+        Run "C:\Program Files\Mozilla Thunderbird\thunderbird.exe"
         Sleep 500
-        WinActivate, ahk_exe olk.exe ; Activate the window with the title "olk.exe" after running Outlook
+        WinActivate, ahk_exe thunderbird.exe ; Activate the window with the title "thunderbird.exe" after running Thunderbird
     }
     Return
 }
