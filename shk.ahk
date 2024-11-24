@@ -285,7 +285,7 @@ CapsLock & j::Send, {Down}                                           ;|
 CapsLock & k::Send, {Up}                                             ;|
 CapsLock & l::Send, {Right}                                          ;|
 ;-----------------------------------o                                ;|
-CapsLock & u::Send, {Del}                                            ;|
+CapsLock & u:: Send, {Del}                                           ;|
 CapsLock & i::Send, ^{Del}                                           ;|
 CapsLock & o::
     {
@@ -399,21 +399,6 @@ CapsLock & Enter::
 
     SetCapsLockState, AlwaysOff
     reset()
-;=====================================================================o
-;                           CapsLock Deletor                         ;|
-;-----------------------------------o---------------------------------o
-CapsLock & u:: Send, {Del}                                           ;|
-CapsLock & i:: Send, ^{Del}                                          ;|
-CapsLock & o::
-    {
-        Send, ^{BS}
-        ;Send, {Space}
-        Return
-    }                                           ;|
-CapsLock & p:: Send,  {BS}
-;---------------------------------------------------------------------o
-SetCapsLockState, AlwaysOff
-reset()
 
 ;=====================================================================o
 ;                            CapsLock Editor                         ;|
@@ -639,21 +624,6 @@ CapsLock & e::
 
 SetCapsLockState, AlwaysOff
 reset()
-;=====================================================================o
-;                       CapsLock Media Controller                    ;|
-;-----------------------------------o---------------------------------o
-;                    CapsLock + F1  |  open the markdown or tex by the word ;|
-;                    CapsLock + F2  |  Volume_Down                   ;|
-;                    CapsLock + F3  |  Volume_Up                     ;|
-;                    CapsLock + F3  |  Media_Play_Pause              ;|
-;                    CapsLock + F5  |  Media_Next                    ;|
-;                    CapsLock + F6  |  Media_Stop                    ;|
-;-----------------------------------o---------------------------------o
-CapsLock & F2::Send, {Volume_Down}                                  ;|
-CapsLock & F3::Send, {Volume_Up}                                    ;|
-;CapsLock & F4:: Send, {Media_Play_Pause}                             ;|
-;CapsLock & F5:: Send, {Media_Next}                                   ;|
-;CapsLock & F6:: Send, {Media_Stop}                                   ;|
 ;---------------------------------------------------------------------o
 CapsLock & F1::
 {
