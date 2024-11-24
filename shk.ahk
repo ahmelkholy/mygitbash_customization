@@ -1,10 +1,23 @@
-; run the script as admin 
-#SingleInstance Force
-SetWorkingDir D:\OneDrive - Faculty Of Engineering (Tanta University)\General_software\scripts\AHK
-if not A_IsAdmin
-    Run *RunAs "D:\OneDrive - Faculty Of Engineering (Tanta University)\General_software\scripts\AHK\shk.ahk"
+; ===========================================================
+; Script Name: shk.ahk
+; Description: Enhanced AHK script with optimized hotkeys,
+;              improved functions, and additional features.
+; ===========================================================
 
-; the code 
+#SingleInstance Force
+; Set working directory
+SetWorkingDir, %A_ScriptDir%
+
+; Run the script as administrator
+if not A_IsAdmin
+{
+    Run *RunAs "%A_ScriptFullPath%"
+    ExitApp
+}
+
+; ----------------------------------------
+; Section: Hotstrings (Auto-corrections)
+; ----------------------------------------
 
 :c:ds::DS
 :C:tanta::Tanta
@@ -27,6 +40,7 @@ if not A_IsAdmin
 :C:@@g::ahmedelkholy109@gmail.com
 :C:@@m::EdkholiakhmedM@mpei.ru
 :C:@@o::ahm_elkholy@outlook.com
+:C:@@y::ahmdelkholy@yandex.com
 :*:proplem::problem
 :C:hte::the
 ::hight::height
@@ -48,23 +62,24 @@ if not A_IsAdmin
 :*:downl::download
 :*:docum::document
 :*:todo::TODO
+:*:recieve::receive
+:*:adress::address
 
 ;script for converting a note into Zettelkasten style.
 :*:pr_zettel::
 (
-@workspace please read the note and search all md files in the workspace and rewrite the note in Zettelkasten style and link them in this style [[note]] only the name of the note inside [[note]] dont add in link please, with the existing notes in the workspace, and please make it in md box to pass it throw, and write the main idea of every figure as a bold sentence below every paragraph, the note is  
+@workspace please read the note and search all md files in the workspace and rewrite the note in Zettelkasten style and link them in this style [[note]] only the name of the note inside [[note]] dont add in link please, with the existing notes in the workspace, and please make it in md box to pass it throw, and write the main idea of every figure as a bold sentence below every paragraph, the note is
 )
 ; scirpt for rewriting the note in latex
 :*:pr_rpr::
 (
-@workspace please reade the selection and rewrite this in latex text and give me in box to pass it throw, and make the text suitable for high impact journal, make the style passive sound and scientific, if there is a link fetch the information in those notes the links will be in this style [[note]] but the final text without any links, if there is the this style [@refkey] convert this to be \cite(refkey) the text is 
+@workspace please reade the selection and rewrite this in latex text and give me in box to pass it throw, and make the text suitable for high impact journal, make the style passive sound and scientific, if there is a link fetch the information in those notes the links will be in this style [[note]] but the final text without any links, if there is the this style [@refkey] convert this to be \cite(refkey) the text is
 )
 ; script for rewriting the paragraph in latex
 :*:pr_rwr::
 (
 @workspace Please read the #selection and rewrite it in LaTeX format. Provide the output in a markdown code block. Ensure that the text is suitable for a high-impact journal, using a passive voice and a scientific tone appropriate for the context.
 )
-
 
 :c:]da::  ; This hotstring replaces "]d" with the current date and time via the commands below.
     FormatTime, CurrentDateTime,, dd.MM.yy   ; It will look like 20.09.23
@@ -78,35 +93,35 @@ return
 
 #IfWinNotActive, ahk_exe Code.exe
 
-SetCapsLockState, AlwaysOff
-;___________________________________________________________
-; This autocompletes (), [], "", ''
-:*?:(::
-Send, {Raw}()
-Send, {Left}
-return
-; Bonus :D
+    SetCapsLockState, AlwaysOff
+    ;___________________________________________________________
+    ; This autocompletes (), [], "", ''
+    :*?:(::
+        Send, {Raw}()
+        Send, {Left}
+    return
+    ; Bonus :D
 
-:*?:[::
-Send, {Raw}[]
-Send, {Left}
-reset()
-return
+    :*?:[::
+        Send, {Raw}[]
+        Send, {Left}
+        reset()
+    return
 #IfWinNotActive
 
 ; Autocompletes '', ""
 :*:'::
-Send, {Raw}'
-Sleep, 100
-Send, {Raw}'
-Send, {Left}
+    Send, {Raw}'
+    Sleep, 100
+    Send, {Raw}'
+    Send, {Left}
 return
 
 :*:"::
-Send, {Raw}"
-Sleep, 100
-Send, {Raw}"
-Send, {Left}
+    Send, {Raw}"
+    Sleep, 100
+    Send, {Raw}"
+    Send, {Left}
 return
 
 SetCapsLockState, AlwaysOff                                          ;|
@@ -118,66 +133,66 @@ reset()
 SetCapsLockState, AlwaysOff
 ;=====================================================================o
 !o::
-{
-    if WinExist("ahk_exe thunderbird.exe")
-        WinActivate, ahk_exe thunderbird.exe ; Activate the window with the title "thunderbird.exe"
-    else
     {
-        Run "C:\Program Files\Mozilla Thunderbird\thunderbird.exe"
-        Sleep 500
-        WinActivate, ahk_exe thunderbird.exe ; Activate the window with the title "thunderbird.exe" after running Thunderbird
+        if WinExist("ahk_exe thunderbird.exe")
+            WinActivate, ahk_exe thunderbird.exe ; Activate the window with the title "thunderbird.exe"
+        else
+        {
+            Run "C:\Program Files\Mozilla Thunderbird\thunderbird.exe"
+            Sleep 500
+            WinActivate, ahk_exe thunderbird.exe ; Activate the window with the title "thunderbird.exe" after running Thunderbird
+        }
+        Return
     }
-    Return
-}
 
 +!o::
-{
-    Run, "C:\Program Files\Google\Chrome\Application\chrome_proxy.exe"  --profile-directory=Default --app-id=kjbdgfilnfhdoflbpgamdcdgpehopbep
-    Return
-}
+    {
+        Run, "C:\Program Files\Google\Chrome\Application\chrome_proxy.exe"  --profile-directory=Default --app-id=kjbdgfilnfhdoflbpgamdcdgpehopbep
+        Return
+    }
 
 ;------------run matlab
 !m::Run "C:\Program Files\Wolfram Research\Wolfram\14.1\WolframNB.exe" -nosplash
 ^!m::Run "C:\Program Files\MATLAB\R2024a\bin\matlab.exe" -nosplash
 #IfWinNotActive ahk_exe EXCEL.EXE
-!i::Run "C:\Program Files (x86)\Internet Download Manager\IDMan.exe"
-SetCapsLockState, AlwaysOff
+    !i::Run "C:\Program Files (x86)\Internet Download Manager\IDMan.exe"
+    SetCapsLockState, AlwaysOff
 #IfWinNotActive
 
 !c::
-{
-SetTitleMatchMode, 2
-If WinExist("ahk_exe chrome.exe")
     {
-    WinActivate, ahk_exe chrome.exe
-    Send ^t
-    Send !d
-    Return
+        SetTitleMatchMode, 2
+        If WinExist("ahk_exe chrome.exe")
+        {
+            WinActivate, ahk_exe chrome.exe
+            Send ^t
+            Send !d
+            Return
+        }
+        else
+        {
+            Run "C:\Program Files\Google\Chrome\Application\chrome.exe" --profile-directory="Default"
+            Sleep 500
+            WinActivate, ahk_exe chrome.exe
+            Send !d
+            Return
+        }
+        Return
     }
-else
-    {
-    Run "C:\Program Files\Google\Chrome\Application\chrome.exe" --profile-directory="Default"
-    Sleep 500
-    WinActivate, ahk_exe chrome.exe
-    Send !d
-    Return
-    }
-Return
-}
 
-SetCapsLockState, AlwaysOff
+    SetCapsLockState, AlwaysOff
 
 !s::
-{
-    Send, ^c
-    Sleep 50
-    If WinExist("ahk_exe msedge.exe")
-        WinActivate
-    else
-        Run, C:\Program Files (x86)\Microsoft\Edge\Application\msedge.exe
-    SetCapsLockState, AlwaysOff
-    Return
-}
+    {
+        Send, ^c
+        Sleep 50
+        If WinExist("ahk_exe msedge.exe")
+            WinActivate
+        else
+            Run, C:\Program Files (x86)\Microsoft\Edge\Application\msedge.exe
+        SetCapsLockState, AlwaysOff
+        Return
+    }
 
 ; !^q::
 ; {
@@ -193,10 +208,13 @@ SetCapsLockState, AlwaysOff
 ; SetCapsLockState, AlwaysOff
 ; ^!SPACE:: Winset, Alwaysontop, , A ; ctrl + space
 +Esc::Run taskmgr
-    SetCapsLockState, AlwaysOff
+SetCapsLockState, AlwaysOff
 return
 SetCapsLockState, AlwaysOff
-; ; Define the function
+
+; ----------------------------------------
+; Section: Custom Functions
+; ----------------------------------------
 
 reset() {
     ; Change the current language to English
@@ -227,31 +245,31 @@ reset() {
 CapsLock & Esc::reset()
 
 CapsLock & 1::
-; Create an array to store window paths
-windowPaths := []
+    ; Create an array to store window paths
+    windowPaths := []
 
-; Enumerate all File Explorer windows
-WinGet, windows, List, ahk_class CabinetWClass
-Loop, %windows%
-{
-    ; Get the HWND of the current window
-    hwnd := windows%A_Index%
-
-    ; Get the full path of the current window
-    WinGetText, path, ahk_id %hwnd%
-    StringTrimRight, path, path, 1
-
-    ; If the window path is already in the array, close the window
-    if (path in windowPaths)
+    ; Enumerate all File Explorer windows
+    WinGet, windows, List, ahk_class CabinetWClass
+    Loop, %windows%
     {
-        WinClose, ahk_id %hwnd%
+        ; Get the HWND of the current window
+        hwnd := windows%A_Index%
+
+        ; Get the full path of the current window
+        WinGetText, path, ahk_id %hwnd%
+        StringTrimRight, path, path, 1
+
+        ; If the window path is already in the array, close the window
+        if (path in windowPaths)
+        {
+            WinClose, ahk_id %hwnd%
+        }
+        ; Otherwise, add the window path to the array
+        else
+        {
+            windowPaths.push(path)
+        }
     }
-    ; Otherwise, add the window path to the array
-    else
-    {
-        windowPaths.push(path)
-    }
-}
 return
 
 ;---------------------------------------------------------------------o
@@ -262,77 +280,20 @@ SetCapsLockState, AlwaysOff
 return
 ;-----------------------------------o                                ;|
 ;-----------------------------------o                                ;|
-CapsLock & h::                                                       ;|
-if GetKeyState("RALT") = 0                                        ;|
-{                                                                    ;|
-    if GetKeyState("LALT") = 0                                        ;|
-        Send, {Left}                                                 ;|
-    else                                                             ;|
-        Send, ^+{Left}
-    return                                                           ;|
-}                                                                    ;|
-else {                                                               ;|
-    if GetKeyState("LALT") = 0                                        ;|
-        Send, ^{Left}                                                ;|
-    else                                                             ;|
-        Send, +^{Left}                                               ;|
-    return                                                           ;|
-}                                                                    ;|
-return                                                               ;|
+CapsLock & h::Send, {Left}                                           ;|
+CapsLock & j::Send, {Down}                                           ;|
+CapsLock & k::Send, {Up}                                             ;|
+CapsLock & l::Send, {Right}                                          ;|
 ;-----------------------------------o                                ;|
-CapsLock & j::                                                       ;|
-if GetKeyState("RALT") = 0                                        ;|
-{                                                                    ;|
-    if GetKeyState("LALT") = 0                                        ;|
-        Send, {Down}                                                 ;|
-    else                                                             ;|
-        Send, ^+{Down}                                                ;|
-    return                                                           ;|
-}                                                                    ;|
-else {                                                               ;|
-    if GetKeyState("LALT") = 0                                        ;|
-        Send, ^{Down}                                                ;|
-    else                                                             ;|
-        Send, +^{Down}                                               ;|
-    return                                                           ;|
-}                                                                    ;|
-return                                                               ;|
-;-----------------------------------o                                ;|
-CapsLock & k::                                                       ;|
-if GetKeyState("RALT") = 0                                        ;|
-{                                                                    ;|
-    if GetKeyState("LALT") = 0                                        ;|
-        Send, {Up}                                                   ;|
-    else                                                             ;|
-        Send, ^+{Up}                                                  ;|
-    return                                                           ;|
-}                                                                    ;|
-else {                                                               ;|
-    if GetKeyState("LALT") = 0                                        ;|
-        Send, ^{Up}                                                  ;|
-    else                                                             ;|
-        Send, +^{Up}                                                 ;|
-    return                                                           ;|
-}                                                                    ;|
-return                                                               ;|
-;-----------------------------------o                                ;|
-CapsLock & l::                                                       ;|
-if GetKeyState("RALT") = 0                                        ;|
-{                                                                    ;|
-    if GetKeyState("LALT") = 0                                        ;|
-        Send, {Right}                                                ;|
-    else                                                             ;|
-        Send, ^+{Right}                                               ;|
-    return                                                           ;|
-}                                                                    ;|
-else {                                                               ;|
-    if GetKeyState("LALT") = 0                                        ;|
-        Send, ^{Right}                                               ;|
-    else                                                             ;|
-        Send, +^{Right}                                              ;|
-    return                                                           ;|
-}                                                                    ;|
-return                                                               ;|
+CapsLock & u::Send, {Del}                                            ;|
+CapsLock & i::Send, ^{Del}                                           ;|
+CapsLock & o::
+    {
+        Send, ^{BS}
+        ;Send, {Space}
+        Return
+    }                                           ;|
+CapsLock & p::Send,  {BS}
 ;---------------------------------------------------------------------o
 SetCapsLockState, AlwaysOff
 reset()
@@ -340,39 +301,39 @@ reset()
 ;                     CapsLock Home/End Navigator                    ;|
 ;-----------------------------------o---------------------------------o
 CapsLock & .::                                                       ;|
-if GetKeyState("control") = 0                                        ;|
-{                                                                    ;|
-    if GetKeyState("alt") = 0                                        ;|
-        Send, {Home}                                                 ;|
-    else                                                             ;|
-        Send, +{Home}                                                ;|
-    return                                                           ;|
-}                                                                    ;|
-else {                                                               ;|
-    if GetKeyState("alt") = 0                                        ;|
-        Send, ^{Home}                                                ;|
-    else                                                             ;|
-        Send, +^{Home}                                               ;|
-    return                                                           ;|
-}                                                                    ;|
+    if GetKeyState("control") = 0                                        ;|
+    {                                                                    ;|
+        if GetKeyState("alt") = 0                                        ;|
+            Send, {Home}                                                 ;|
+        else                                                             ;|
+            Send, +{Home}                                                ;|
+        return                                                           ;|
+    }                                                                    ;|
+    else {                                                               ;|
+        if GetKeyState("alt") = 0                                        ;|
+            Send, ^{Home}                                                ;|
+        else                                                             ;|
+            Send, +^{Home}                                               ;|
+        return                                                           ;|
+    }                                                                    ;|
 return                                                               ;|
 ;-----------------------------------o                                ;|
 CapsLock & /::                                                       ;|
-if GetKeyState("control") = 0                                        ;|
-{                                                                    ;|
-    if GetKeyState("alt") = 0                                        ;|
-        Send, {End}                                                  ;|
-    else                                                             ;|
-        Send, +{End}                                                 ;|
-    return                                                           ;|
-}                                                                    ;|
-else {                                                               ;|
-    if GetKeyState("alt") = 0                                        ;|
-        Send, ^{End}                                                 ;|
-    else                                                             ;|
-        Send, +^{End}                                                ;|
-    return                                                           ;|
-}                                                                    ;|
+    if GetKeyState("control") = 0                                        ;|
+    {                                                                    ;|
+        if GetKeyState("alt") = 0                                        ;|
+            Send, {End}                                                  ;|
+        else                                                             ;|
+            Send, +{End}                                                 ;|
+        return                                                           ;|
+    }                                                                    ;|
+    else {                                                               ;|
+        if GetKeyState("alt") = 0                                        ;|
+            Send, ^{End}                                                 ;|
+        else                                                             ;|
+            Send, +^{End}                                                ;|
+        return                                                           ;|
+    }                                                                    ;|
 return
 SetCapsLockState, AlwaysOff  ;|
 reset()
@@ -381,39 +342,39 @@ reset()
 ;                      CapsLock Page Navigator                       ;|
 ;-----------------------------------o---------------------------------o
 CapsLock & ,::                                                       ;|
-if GetKeyState("control") = 0                                        ;|
-{                                                                    ;|
-    if GetKeyState("alt") = 0                                        ;|
-        Send, {PgUp}                                                 ;|
-    else                                                             ;|
-        Send, +{PgUp}                                                ;|
-    return                                                           ;|
-}                                                                    ;|
-else {                                                               ;|
-    if GetKeyState("alt") = 0                                        ;|
-        Send, ^{PgUp}                                                ;|
-    else                                                             ;|
-        Send, +^{PgUp}                                               ;|
-    return                                                           ;|
-}                                                                    ;|
+    if GetKeyState("control") = 0                                        ;|
+    {                                                                    ;|
+        if GetKeyState("alt") = 0                                        ;|
+            Send, {PgUp}                                                 ;|
+        else                                                             ;|
+            Send, +{PgUp}                                                ;|
+        return                                                           ;|
+    }                                                                    ;|
+    else {                                                               ;|
+        if GetKeyState("alt") = 0                                        ;|
+            Send, ^{PgUp}                                                ;|
+        else                                                             ;|
+            Send, +^{PgUp}                                               ;|
+        return                                                           ;|
+    }                                                                    ;|
 return                                                               ;|
 ;-----------------------------------o                                ;|
 CapsLock & m::                                                       ;|
-if GetKeyState("control") = 0                                        ;|
-{                                                                    ;|
-    if GetKeyState("alt") = 0                                        ;|
-        Send, {PgDn}                                                 ;|
-    else                                                             ;|
-        Send, +{PgDn}                                                ;|
-    return                                                           ;|
-}                                                                    ;|
-else {                                                               ;|
-    if GetKeyState("alt") = 0                                        ;|
-        Send, ^{PgDn}                                                ;|
-    else                                                             ;|
-        Send, +^{PgDn}                                               ;|
-    return                                                           ;|
-}                                                                    ;|
+    if GetKeyState("control") = 0                                        ;|
+    {                                                                    ;|
+        if GetKeyState("alt") = 0                                        ;|
+            Send, {PgDn}                                                 ;|
+        else                                                             ;|
+            Send, +{PgDn}                                                ;|
+        return                                                           ;|
+    }                                                                    ;|
+    else {                                                               ;|
+        if GetKeyState("alt") = 0                                        ;|
+            Send, ^{PgDn}                                                ;|
+        else                                                             ;|
+            Send, +^{PgDn}                                               ;|
+        return                                                           ;|
+    }                                                                    ;|
 return                                                               ;|
 ;---------------------------------------------------------------------o
 
@@ -428,27 +389,27 @@ CapsLock & Left:: Send #{Left}                             ;|
 CapsLock & Right:: Send #{Right}                           ;|
 ;-----------------------------------o                                ;|
 CapsLock & Enter::
-{                                                   ;|
-SendEvent {Blind}{LButton down}                                      ;|
-KeyWait Enter                                                      ;|
-SendEvent {Blind}{LButton up}                                        ;|
-return
-}                                                               ;|
-;---------------------------------------------------------------------o
+    {                                                   ;|
+        SendEvent {Blind}{LButton down}                                      ;|
+        KeyWait Enter                                                      ;|
+        SendEvent {Blind}{LButton up}                                        ;|
+        return
+    }                                                               ;|
+    ;---------------------------------------------------------------------o
 
-SetCapsLockState, AlwaysOff
-reset()
+    SetCapsLockState, AlwaysOff
+    reset()
 ;=====================================================================o
 ;                           CapsLock Deletor                         ;|
 ;-----------------------------------o---------------------------------o
 CapsLock & u:: Send, {Del}                                           ;|
 CapsLock & i:: Send, ^{Del}                                          ;|
 CapsLock & o::
-{
-Send, ^{BS}
-;Send, {Space}
-Return
-}                                           ;|
+    {
+        Send, ^{BS}
+        ;Send, {Space}
+        Return
+    }                                           ;|
 CapsLock & p:: Send,  {BS}
 ;---------------------------------------------------------------------o
 SetCapsLockState, AlwaysOff
@@ -458,220 +419,221 @@ reset()
 ;                            CapsLock Editor                         ;|
 ;-----------------------------------o---------------------------------o
 #IfWinActive ahk_exe msedge.exe
-CapsLock & z:: Send, ^+E
-!s::Send, ^t
-CapsLock & f::
-{
-Send ^c
-if GetKeyState("alt") = 0                                            ;|
-{                                                                    ;|
-SetTitleMatchMode, 2
+    CapsLock & z:: Send, ^+E
+    !s::Send, ^t
+    CapsLock & f::
+        {
+            Send ^c
+            if GetKeyState("alt") = 0                                            ;|
+            {                                                                    ;|
+                SetTitleMatchMode, 2
 
-    Send ^t
-    Send !d
-    Send ^v
-Send {enter}
-Return
+                Send ^t
+                Send !d
+                Send ^v
+                Send {enter}
+                Return
 
+                return                                                       ;|
+            }                                                                    ;|
+            else
+            {                                                               ;|
+                send ^f
+                Send ^v
+                return                                                          ;|
+            }                                                                    ;|
 
-return                                                       ;|
-}                                                                    ;|
-else
-{                                                               ;|
-    send ^f
-    Send ^v
-	return                                                          ;|
-}                                                                    ;|
-
-}
+        }
 #IfWinActive
 
-
 #IfWinNotActive ahk_exe msedge.exe
-CapsLock & z:: Run "C:\Program Files\Zotero\zotero.exe"
-
+    CapsLock & z:: Run "C:\Program Files\Zotero\zotero.exe"
 
 #IfWinNotActive     ;|
 CapsLock & x:: Send, ^x                                              ;|
 CapsLock & c:: Send, ^c                                              ;|
-CapsLock & v:: Send, #!v                                              ;|
+CapsLock & v::
+    {
+        Run, "C:\Program Files\Ditto\Ditto.exe"
+        Return
+    }                                              ;|
 
 #IfWinActive, ahk_class QPasteClass ahk_exe Ditto.exe
-j::Send {Down}
-k::Send {Up}
-`;::Send {Enter}
-return
+    j::Send {Down}
+    k::Send {Up}
+    `;::Send {Enter}
+    return
 
 #IfWinActive
 #IfWinActive ahk_exe chrome.exe
-CapsLock & a::
-{
-    if GetKeyState("alt") = 0
-    {
-        Send, ^+{a}
-        return
-    }
-    else
-    {
-        Send, ^{a}
-        return
-    }
-    return
-}
+    CapsLock & a::
+        {
+            if GetKeyState("alt") = 0
+            {
+                Send, ^+{a}
+                return
+            }
+            else
+            {
+                Send, ^{a}
+                return
+            }
+            return
+        }
 #IfWinActive
 
 #IfWinActive ahk_exe SumatraPDF.exe
-CapsLock & a::
-{
-    if GetKeyState("alt") = 0
-    {
-        Send, ^+{p}
-        return
-    }
-    else
-    {
-        Send, ^{a}
-        return
-    }
-    return
-}
+    CapsLock & a::
+        {
+            if GetKeyState("alt") = 0
+            {
+                Send, ^+{p}
+                return
+            }
+            else
+            {
+                Send, ^{a}
+                return
+            }
+            return
+        }
 #IfWinActive
 
 #IfWinActive, ahk_exe Code.exe
-CapsLock & a::
-{
-    if GetKeyState("alt") = 0
-    {
-        Send, ^p
-        return
-    }
-    else
-    {
-        Send, ^+p
-        return
-    }
+    CapsLock & a::
+        {
+            if GetKeyState("alt") = 0
+            {
+                Send, ^p
+                return
+            }
+            else
+            {
+                Send, ^+p
+                return
+            }
+            return
+        }
+
+    :*:$::
+        Send, {Raw}$$
+        Send, {Left 1}
     return
-}
 
-:*:$::
-Send, {Raw}$$
-Send, {Left 1}
-return
+    SetCapsLockState, AlwaysOff
 
-SetCapsLockState, AlwaysOff
+    ^+s:: ; If Ctrl+Shift+S is pressed
+        WinGetTitle, Title, A ; Get the title of the active window
+        StringSplit, OutputArray, Title, / ; Split the title on the slash character
+        FileName := OutputArray1 ; The first item in the array should be your file name
 
-^+s:: ; If Ctrl+Shift+S is pressed
-    WinGetTitle, Title, A ; Get the title of the active window
-    StringSplit, OutputArray, Title, / ; Split the title on the slash character
-    FileName := OutputArray1 ; The first item in the array should be your file name
+        StringGetPos, pos, FileName, .m ; Find the position of ".m" in the file name
+        if pos != -1 ; If ".m" is found
+        {
+            StringLeft, FileNameNoExt, FileName, pos ; Get the file name without the extension
+            Clipboard := FileNameNoExt ; Copy the file name without extension to the clipboard
+            IfWinExist ahk_exe matlab.exe ; If MATLAB exists
+            {
+                WinActivate, ; Activate the MATLAB window
+                Send, %FileNameNoExt% ; Send the file name without extension
+                Send, {Enter} ; Press Enter to run the script
+            }
+            reset()
+        }
+    return
 
-    StringGetPos, pos, FileName, .m ; Find the position of ".m" in the file name
-    if pos != -1 ; If ".m" is found
-    {
-        StringLeft, FileNameNoExt, FileName, pos ; Get the file name without the extension
-        Clipboard := FileNameNoExt ; Copy the file name without extension to the clipboard
-        IfWinExist ahk_exe matlab.exe ; If MATLAB exists
-         {
-            WinActivate, ; Activate the MATLAB window
-            Send, %FileNameNoExt% ; Send the file name without extension
-            Send, {Enter} ; Press Enter to run the script
-         }
-    reset()
-    }
-return
-
-:*?:{::
-Send, {Raw}{}
-Send, {Left}
-reset()
-return
-#IfWinActive
+    :*?:{::
+        Send, {Raw}{}
+        Send, {Left}
+        reset()
+        return
+    #IfWinActive
 
 #IfWinActive, ahk_exe  Cursor.exe
-CapsLock & a::
-{
-    if GetKeyState("alt") = 0
+    CapsLock & a::
     {
-        Send, ^p
+        if GetKeyState("alt") = 0
+        {
+            Send, ^p
+            return
+        }
+        else
+        {
+            Send, ^+p
+            return
+        }
         return
     }
-    else
-    {
-        Send, ^+p
-        return
-    }
-    return
-}
 #IfWinActive
 #IfWinActive, ahk_exe Obsidian.exe
-CapsLock & a::
-{
-    if GetKeyState("alt") = 0
+    CapsLock & a::
     {
-        Send, ^p
+        if GetKeyState("alt") = 0
+        {
+            Send, ^p
+            return
+        }
+        else
+        {
+            Send, ^+p
+            return
+        }
         return
     }
-    else
-    {
-        Send, ^+p
-        return
-    }
-    return
-}
 #IfWinActive
 #IfWinActive ahk_exe msedge.exe
-CapsLock & a::Send, ^+{a}
+    CapsLock & a::Send, ^+{a}
 #IfWinActive
 
 #IfWinActive ahk_class Chrome_WidgetWin_1
-CapsLock & a::Send, ^+{a}
+    CapsLock & a::Send, ^+{a}
 #IfWinActive
 
 #IfWinNotActive ahk_exe chrome.exe
-CapsLock & a::Send, ^{a}
+    CapsLock & a::Send, ^{a}
 #IfWinNotActive                                      ;|
 CapsLock & y:: Send, ^y                                              ;|
 CapsLock & w::
 {
-if GetKeyState("control") = 0
-{
-if GetKeyState("alt") = 0                                            ;|
-{                                                                   ;|
-	Send, ^{Left}
-	return                                                        ;|
-}                                                                    ;|
-else {                                                               ;|
-	Send, {Home}
-	return                                                          ;|
-}
-}
-else
-{
-    Send, {Left}
-    return
-}
+    if GetKeyState("control") = 0
+    {
+        if GetKeyState("alt") = 0                                            ;|
+        {                                                                   ;|
+            Send, ^{Left}
+            return                                                        ;|
+        }                                                                    ;|
+        else {                                                               ;|
+            Send, {Home}
+            return                                                          ;|
+        }
+    }
+    else
+    {
+        Send, {Left}
+        return
+    }
 }
 SetCapsLockState, AlwaysOff
 reset()
 CapsLock & e::
 {
-if GetKeyState("control") = 0
-{
-if GetKeyState("alt") = 0                                            ;|
-{                                                                   ;|
-	Send, ^{Right}
-	return                                                        ;|
-}                                                                    ;|
-else {                                                               ;|
-	Send, {end}
-	return                                                          ;|
-}
-}
-else
-{
-    Send, {Right}
-    return
-}
+    if GetKeyState("control") = 0
+    {
+        if GetKeyState("alt") = 0                                            ;|
+        {                                                                   ;|
+            Send, ^{Right}
+            return                                                        ;|
+        }                                                                    ;|
+        else {                                                               ;|
+            Send, {end}
+            return                                                          ;|
+        }
+    }
+    else
+    {
+        Send, {Right}
+        return
+    }
 }
 ;---------------------------------------------------------------------o
 
@@ -687,9 +649,8 @@ reset()
 ;                    CapsLock + F5  |  Media_Next                    ;|
 ;                    CapsLock + F6  |  Media_Stop                    ;|
 ;-----------------------------------o---------------------------------o
-                                  ;|
-;CapsLock & F2:: Send, {Volume_Down}                                  ;|
-;CapsLock & F3:: Send, {Volume_Up}                                    ;|
+CapsLock & F2::Send, {Volume_Down}                                  ;|
+CapsLock & F3::Send, {Volume_Up}                                    ;|
 ;CapsLock & F4:: Send, {Media_Play_Pause}                             ;|
 ;CapsLock & F5:: Send, {Media_Next}                                   ;|
 ;CapsLock & F6:: Send, {Media_Stop}                                   ;|
@@ -697,27 +658,27 @@ reset()
 CapsLock & F1::
 {
     filePath := Explorer_GetSelection()
-if filePath =
-{
-    MsgBox, You didn't select anything.
-    Sleep 500
-    Send, {Enter}
-}
-else
-{
-    Run, winword.exe %filePath%
-    Sleep 600
-    Send, {Enter}
-return
-}
+    if filePath =
+    {
+        MsgBox, You didn't select anything.
+        Sleep 500
+        Send, {Enter}
+    }
+    else
+    {
+        Run, winword.exe %filePath%
+        Sleep 600
+        Send, {Enter}
+        return
+    }
 }
 Explorer_GetSelection(hwnd="") {
-        WinGet, process, processName, % "ahk_id" hwnd := hwnd? hwnd:WinExist("A")
-        WinGetClass class, ahk_id %hwnd%
-        if (process = "explorer.exe")
-            if (class ~= "Progman|WorkerW") {
-                ControlGet, files, List, Selected Col1, SysListView321, ahk_class %class%
-                Loop, Parse, files, `n, `r
+    WinGet, process, processName, % "ahk_id" hwnd := hwnd? hwnd:WinExist("A")
+    WinGetClass class, ahk_id %hwnd%
+    if (process = "explorer.exe")
+        if (class ~= "Progman|WorkerW") {
+            ControlGet, files, List, Selected Col1, SysListView321, ahk_class %class%
+            Loop, Parse, files, `n, `r
                 ToReturn .= A_Desktop "\" A_LoopField "`n"
         } else if (class ~= "(Cabinet|Explore)WClass") {
             for window in ComObjCreate("Shell.Application").Windows
@@ -782,52 +743,52 @@ reset()
 ;-----------------------------------o---------------------------------o
 CapsLock & d::
 {
-if GetKeyState("alt") = 0                                            ;|
-{                                                                    ;|
-	Send, {End}
-	Send, +{Home}
-	Send, ^+{Left}
-	Send, {Delete}
-	return                                                        ;|
-}                                                                    ;|
-else {                                                               ;|
-	Send, {End}
-	Send, +{Home}
-	return                                                          ;|
-}                                                                    ;|
+    if GetKeyState("alt") = 0                                            ;|
+    {                                                                    ;|
+        Send, {End}
+        Send, +{Home}
+        Send, ^+{Left}
+        Send, {Delete}
+        return                                                        ;|
+    }                                                                    ;|
+    else {                                                               ;|
+        Send, {End}
+        Send, +{Home}
+        return                                                          ;|
+    }                                                                    ;|
 }
 
 CapsLock & f::
 {
-Send ^c
-if GetKeyState("alt") = 0                                            ;|
-{                                                                    ;|
-SetTitleMatchMode, 2
-If WinExist("ahk_exe chrome.exe")
-    {
-    WinActivate, ahk_exe chrome.exe
-    Send ^t
-    Send !d
-    Send ^v
-    Send {enter}
-    Return
-    }
-else
-    {
-    Run "C:\Program Files\Google\Chrome\Application\chrome.exe" --profile-directory="Default"
-    Sleep 200
-    Send !d
-    Send ^v
-    Send {enter}
-    }
-return                                                       ;|
-}                                                                    ;|
-else
-{                                                               ;|
-    send ^f
-    Send ^v
-	return                                                          ;|
-}                                                                    ;|
+    Send ^c
+    if GetKeyState("alt") = 0                                            ;|
+    {                                                                    ;|
+        SetTitleMatchMode, 2
+        If WinExist("ahk_exe chrome.exe")
+        {
+            WinActivate, ahk_exe chrome.exe
+            Send ^t
+            Send !d
+            Send ^v
+            Send {enter}
+            Return
+        }
+        else
+        {
+            Run "C:\Program Files\Google\Chrome\Application\chrome.exe" --profile-directory="Default"
+            Sleep 200
+            Send !d
+            Send ^v
+            Send {enter}
+        }
+        return                                                       ;|
+    }                                                                    ;|
+    else
+    {                                                               ;|
+        send ^f
+        Send ^v
+        return                                                          ;|
+    }                                                                    ;|
 }
 
 SetCapsLockState, AlwaysOff
@@ -845,7 +806,6 @@ CapsLock & r::
 SetCapsLockState, AlwaysOff
 
 ;---------------------------------------------------------------------o
-
 
 ;=====================================================================o
 ;                        CapsLock Char Mapping                       ;|
@@ -867,30 +827,24 @@ SetCapsLockState, AlwaysOff
 ;-----------------------------------o---------------------------------o
 CapsLock & `;::
 {
-if GetKeyState("alt") = 0
-{
-    Send, {Enter}
-    return
-}
-else
-{
-    CoordMode, Caret, Screen     ; set Caret to use Screen Coordinates
-    CoordMode, Mouse, Screen     ; set Mouse to use Screen Coordinates
-    MouseMove, %A_CaretX%, %A_CaretY%   ; move mouse to caret position
-    return
-}
+    if GetKeyState("alt") = 0
+    {
+        Send, {Enter}
+        return
+    }
+    else
+    {
+        CoordMode, Caret, Screen     ; set Caret to use Screen Coordinates
+        CoordMode, Mouse, Screen     ; set Mouse to use Screen Coordinates
+        MouseMove, %A_CaretX%, %A_CaretY%   ; move mouse to caret position
+        return
+    }
 }
 SetCapsLockState, AlwaysOff
-CapsLock & '::
-{
-    Send, =
-    return
-}
-ctrl & j::
-{
-    Send, {AppsKey}
-    return
-}
+CapsLock & '::Send, =
+
+ctrl & j::Send, {AppsKey}
+
 CapsLock & [:: Send, ^{-}                                              ;|
 SetCapsLockState, AlwaysOff
 CapsLock & ]:: Send, ^{=}                                         ;|
@@ -916,30 +870,30 @@ CapsLock & =:: Send,+{=}
 SetCapsLockState, AlwaysOff
 CapsLock & t::
 {
-if GetKeyState("alt") = 0                                            
-{                                                                    
-    If (WinExist("ahk_exe  Code.exe"))
-    WinActivate, ahk_exe Code.exe
-    Else
+    if GetKeyState("alt") = 0
     {
-    Run "C:\Users\ahm_e\AppData\Local\Programs\Microsoft VS Code\Code.exe"
-    Sleep, Delay, 200
-    WinActivate, ahk_exe Code.exe
+        If (WinExist("ahk_exe  Code.exe"))
+            WinActivate, ahk_exe Code.exe
+        Else
+        {
+            Run "C:\Users\ahm_e\AppData\Local\Programs\Microsoft VS Code\Code.exe"
+            Sleep, Delay, 200
+            WinActivate, ahk_exe Code.exe
+        }
+        Return
     }
-	Return
-}               
-else
-{          
-If (WinExist("ahk_exe Obsidian.exe"))
-    WinActivate, ahk_exe Obsidian.exe 
-Else
+    else
     {
-	Run "C:\Users\ahm_e\AppData\Local\Obsidian\Obsidian.exe"
-    Sleep, Delay, 200
-    WinActivate, ahk_exe Obsidian.exe
+        If (WinExist("ahk_exe Obsidian.exe"))
+            WinActivate, ahk_exe Obsidian.exe
+        Else
+        {
+            Run "C:\Users\ahm_e\AppData\Local\Obsidian\Obsidian.exe"
+            Sleep, Delay, 200
+            WinActivate, ahk_exe Obsidian.exe
+        }
+        Return
     }
-	Return 
-}               
 }
 
 SetCapsLockState, AlwaysOff
@@ -950,11 +904,11 @@ reset()
 ; Alt+N
 ;-----------------------------------
 #IfWinActive ahk_class CabinetWClass
-!SC031::
+    !SC031::
 #IfWinActive ahk_class ExploreWClass
-!SC031::
+    !SC031::
 #IfWinActive ahk_class Progman
-!SC031::
+    !SC031::
 
     ; Get full path from open Explorer window using COM object
     FullPath := ""
@@ -991,17 +945,17 @@ reset()
     FileAppend, , %UserInput%
     ; Open the file in the appropriate editor
     Run %UserInput%
-Return
+    Return
 
 ;-----------------------------------o---------------------------------o
 ;-----------------------------------o---------------------------------o
 ; this to creat new folder using Ctrl+alt+n
 #IfWinActive ahk_class CabinetWClass
-^+SC031::
+    ^+SC031::
 #IfWinActive ahk_class ExploreWClass
-^+SC031::
+    ^+SC031::
 #IfWinActive ahk_class Progman
-^+SC031::
+    ^+SC031::
 
     ; Get full path from open Explorer window using COM object
     FullPath := ""
@@ -1040,4 +994,4 @@ Return
     FileCreateDir, %FolderName%
     ; Open the directory in the Explorer
     Run, explorer.exe %FolderName%
-Return
+    Return
